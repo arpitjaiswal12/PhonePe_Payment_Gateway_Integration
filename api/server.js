@@ -73,6 +73,36 @@ app.post('/create-order', async (req, res) => {
 
 });
 
+
+app.post('/status', async (req, res) => {
+    const merchantTransactionId = req.query.id;
+
+    const keyIndex = 1
+    const string  = `/pg/v1/status/${MERCHANT_ID}/${merchantTransactionId}` + MERCHANT_KEY
+    const sha256 = crypto.createHash('sha256').update(string).digest('hex')
+    const checksum = sha256 + '###' + keyIndex
+
+    const option = {
+        method: 'GET',
+        url:`${MERCHANT_STATUS_URL}/${MERCHANT_ID}/${merchantTransactionId}`,
+        headers: {
+            accept : 'application/json',
+            'Content-Type': 'application/json',
+            'X-VERIFY': checksum,
+            'X-MERCHANT-ID': MERCHANT_ID
+        },
+    }
+
+    axios.request(option).then((response) => {
+        if (response.data.success === true){
+            return res.redirect(successUrl)
+        }else{
+            return res.redirect(failureUrl)
+        }
+    })
+});
+
+
 app.listen(8000, () => {
   console.log('Server is running on port 8000');
 });
