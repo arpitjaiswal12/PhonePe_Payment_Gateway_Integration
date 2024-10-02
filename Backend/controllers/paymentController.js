@@ -30,7 +30,7 @@ exports.createOrder = async (req, res) => {
       mobileNumber: mobileNumber,
       amount: amount * 100, // Convert to paise
       merchantTransactionId: orderId,
-      redirectUrl: `${redirectUrl}/?id=${orderId}`,
+      redirectUrl: `api/payment/${redirectUrl}/?id=${orderId}`,
       redirectMode: "POST",
       paymentInstrument: { type: "PAY_PAGE" },
     };
@@ -101,7 +101,7 @@ exports.paymentStatus = async (req, res) => {
 
     const option = {
       method: "GET",
-      url: `${MERCHANT_STATUS_URL}/${MERCHANT_ID}/${merchantTransactionId}`,
+      url: `api/payment/${MERCHANT_STATUS_URL}/${MERCHANT_ID}/${merchantTransactionId}`,
       headers: {
         accept: "application/json",
         "Content-Type": "application/json",
