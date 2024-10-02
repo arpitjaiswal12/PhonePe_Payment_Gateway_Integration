@@ -3,6 +3,6 @@ const { createOrder, paymentStatus } = require('../controllers/paymentController
 const router = express.Router();
 
 router.post('/create-order', createOrder);
-router.post('/status', paymentStatus);
+router.get('/status', paymentStatus);
 
 module.exports = router;
