@@ -82,7 +82,7 @@ exports.createOrder = async (req, res) => {
 // Status Controller
 exports.paymentStatus = async (req, res) => {
   try {
-    const { id: merchantTransactionId } = req.query;
+    const { merchantTransactionId } = req.query.id;
 
     // Validate merchantTransactionId
     if (!merchantTransactionId) {
