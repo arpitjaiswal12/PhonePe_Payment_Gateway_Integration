@@ -8,14 +8,7 @@ const redirectUrl = "http://192.168.0.182:8000/status";
 const successUrl = "http://192.168.0.182:5173/payment-success";
 const failureUrl = "http://192.168.0.182:5173/payment-failure";
 
-const generateChecksum = (payload, url) => {
-    const keyIndex = 1;
-    const string = payload + url + MERCHANT_KEY;
-    const sha256 = crypto.createHash('sha256').update(string).digest('hex');
-    return sha256 + '###' + keyIndex;
-};
-
 module.exports = {
     MERCHANT_KEY, MERCHANT_ID, MERCHANT_BASE_URL, MERCHANT_STATUS_URL,
-    redirectUrl, successUrl, failureUrl, generateChecksum
+    redirectUrl, successUrl, failureUrl
 };
