@@ -29,7 +29,7 @@ exports.createOrder = async (req, res) => {
       amount: amount * 100, // Convert to paise
       merchantTransactionId: orderId,
       redirectUrl: `${redirectUrl}/?id=${orderId}`,
-      redirectMode: "POST",
+      redirectMode: "GET",
       paymentInstrument: { type: "PAY_PAGE" },
     };
 
@@ -82,7 +82,8 @@ exports.createOrder = async (req, res) => {
 // Status Controller
 exports.paymentStatus = async (req, res) => {
   try {
-    const { merchantTransactionId } = req.query.id;
+    const {id: merchantTransactionId } = req.query;
+    console.log(merchantTransactionId)
 
     // Validate merchantTransactionId
     if (!merchantTransactionId) {
@@ -109,6 +110,7 @@ exports.paymentStatus = async (req, res) => {
 
     // Make the request to PhonePe API
     const response = await axios.request(options);
+    console.log(response);
 
     // Handle success or failure based on the response
     if (response.data?.success) {
