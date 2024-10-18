@@ -5,9 +5,9 @@ const MERCHANT_STATUS_URL = "https://api-preprod.phonepe.com/apis/pg-sandbox/pg/
 // const redirectUrl = "https://phone-pe-payment-gateway-integration.vercel.app/api/payment/status";
 // const failureUrl = "https://phone-pe-payment-gateway-integration.vercel.app/api/payment/payment-failure";
 // const successUrl = "https://phone-pe-payment-gateway-integration.vercel.app/api/payment/payment-success";
-const redirectUrl = "http://localhost:8000/api/payment/status";
-const successUrl = "http://localhost:8000/api/payment/payment-success";
-const failureUrl = "http://localhost:8000/api/payment/payment-failure";
+const redirectUrl = "https://www.blackgrapessoftech.com/api/payment/status";
+const successUrl = "https://www.blackgrapessoftech.com/api/payment/payment-success";
+const failureUrl = "https://www.blackgrapessoftech.com/api/payment/payment-failure";
 
 
 module.exports = {
