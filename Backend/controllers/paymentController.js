@@ -13,6 +13,7 @@ const {
 
 // Create Order Controller
 exports.createOrder = async (req, res) => {
+  console.log("creating order")
   try {
     const { name, mobileNumber, amount, transactionID } = req.body;
 
@@ -24,15 +25,16 @@ exports.createOrder = async (req, res) => {
     }
 
     const MUID = "MUID" + uuidv4();
-
+    const tId =  transactionID || 10000 + Math.random() * 10000;
+    console.log("transaction ID ", tId );
     const paymentPayload = {
       merchantId: MERCHANT_ID,
-      merchantTransactionId: transactionID,
+      merchantTransactionId: tId,
       merchantUserId: MUID,
       name: name,
       mobileNumber: mobileNumber,
       amount: amount * 100, // Convert to paise
-      redirectUrl: `${redirectUrl}/${transactionID}`,
+      redirectUrl: `${redirectUrl}/${tId}`,
       redirectMode: "POST",
       paymentInstrument: { type: "PAY_PAGE" },
     };
