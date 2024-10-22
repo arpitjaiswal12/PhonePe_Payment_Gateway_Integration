@@ -22,8 +22,8 @@ const Checkout = () => {
 
     try {
       const response = await axios.post(
-        "https://www.blackgrapessoftech.com/api/payment/create-order",
-        // "http://localhost:8000/api/payment/create-order",
+        // "https://www.blackgrapessoftech.com/api/payment/create-order",
+        "http://localhost:8000/api/payment/create-order",
         data
       );
       console.log(response.data);

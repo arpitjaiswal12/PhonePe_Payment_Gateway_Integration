@@ -19,7 +19,7 @@ app.use(express.json());
 
 app.use((req,res,next)=>{
   res.setHeader('Referrer-Policy','strict-origin-when-cross-origin');
-  res.setHeaders('Cross-Origin-Opener-Policy','same-origin');
+  res.setHeader('Cross-Origin-Opener-Policy','same-origin');
   next();
 });
 
