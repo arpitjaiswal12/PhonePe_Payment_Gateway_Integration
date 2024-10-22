@@ -10,14 +10,18 @@ app.use(
     credentials: true,
   })
 );
+
+
+
+// Allowing CORS for all origins
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+
 app.use((req,res,next)=>{
   res.setHeader('Referrer-Policy','strict-origin-when-cross-origin');
   res.setHeaders('Cross-Origin-Opener-Policy','same-origin');
   next();
 });
-// Allowing CORS for all origins
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
 
 app.use("/api/payment", paymentRoutes);
 
