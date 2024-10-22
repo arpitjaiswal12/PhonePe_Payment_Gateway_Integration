@@ -25,7 +25,7 @@ exports.createOrder = async (req, res) => {
     }
 
     const MUID = "MUID" + uuidv4();
-    const tId =  transactionID || 10000 + Math.random() * 10000;
+    const tId =  transactionID || Math.floor(10000 + Math.random() * 10000);
     console.log("transaction ID ", tId );
     const paymentPayload = {
       merchantId: MERCHANT_ID,
