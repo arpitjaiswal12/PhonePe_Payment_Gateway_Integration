@@ -6,6 +6,6 @@ const router = express.Router();
 router.post('/create-order', createOrder);
 
 // Route for checking payment status
-router.get('/status/:id', paymentStatus);
+router.post('/status/:id', paymentStatus);
 
 module.exports = router;
