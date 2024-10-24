@@ -25,8 +25,9 @@ exports.createOrder = async (req, res) => {
     }
 
     const MUID = "MUID" + uuidv4();
-    const tId =  transactionID || Math.floor(10000 + Math.random() * 10000);
-    console.log("transaction ID ", tId );
+    const tId = transactionID ? "TID" + transactionID : "TID" + Math.floor(1000000 + Math.random() * 1000000);
+
+    console.log("transaction ID while creating payment ", tId );
     const paymentPayload = {
       merchantId: MERCHANT_ID,
       merchantTransactionId: tId,
@@ -100,8 +101,8 @@ exports.paymentStatus = async (req, res) => {
   try {
     const merchantTransactionId = req.params.id;
     const merchantId = MERCHANT_ID;
-    console.log("merchantTransactionId-->>" + merchantTransactionId);
-    console.log("merchantId-->" + merchantId);
+    console.log("merchantTransactionId-->> " , merchantTransactionId);
+    console.log("merchantId--> " ,merchantId);
 
     // Validate merchantTransactionId
     if (!merchantTransactionId) {
