@@ -98,8 +98,6 @@ exports.paymentStatus = async (req, res) => {
   try {
     const merchantTransactionId = req.params.id;
     const merchantId = MERCHANT_ID;
-    console.log("merchantTransactionId-->>" + merchantTransactionId);
-    console.log("merchantId-->" + merchantId);
 
     // Validate merchantTransactionId
     if (!merchantTransactionId) {
