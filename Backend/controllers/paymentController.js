@@ -33,7 +33,7 @@ exports.createOrder = async (req, res) => {
       mobileNumber: mobileNumber,
       amount: amount * 100, // Convert to paise
       redirectUrl: `${redirectUrl}/${transactionID}`,
-      redirectMode: "POST",
+      redirectMode: "GET",
       paymentInstrument: { type: "PAY_PAGE" },
     };
 
