@@ -9,7 +9,6 @@ const redirectUrl = "https://www.blackgrapessoftech.com/api/payment/status";
 const successUrl = "https://apprenticeship.blackgrapessoftech.com/payment-success";
 const failureUrl = "https://apprenticeship.blackgrapessoftech.com/payment-failure";
 
-
 module.exports = {
   SALT_KEY,
   MERCHANT_ID,
