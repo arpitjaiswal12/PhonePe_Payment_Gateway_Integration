@@ -33,7 +33,7 @@ exports.createOrder = async (req, res) => {
       mobileNumber: mobileNumber,
       amount: amount * 100, // Convert to paise
       redirectUrl: `${redirectUrl}/${transactionID}`,
-      redirectMode: "GET",
+      redirectMode: "REDIRECT",
       paymentInstrument: { type: "PAY_PAGE" },
     };
 
@@ -95,69 +95,51 @@ exports.createOrder = async (req, res) => {
 
 // Status Controller
 exports.paymentStatus = async (req, res) => {
-  try {
-    const merchantTransactionId = req.params.id;
-    const merchantId = MERCHANT_ID;
+  const merchantTransactionId = req.params.id;
+  const merchantId = MERCHANT_ID;
 
-    // Validate merchantTransactionId
-    if (!merchantTransactionId) {
-      return res.status(400).json({ error: "Missing merchant transaction ID" });
-    }
-    if (!merchantId) {
-      return res.status(400).json({ error: "Missing merchantID" });
-    }
+  // Validate merchantTransactionId
+  if (!merchantTransactionId) {
+    return res.status(400).json({ error: "Missing merchant transaction ID" });
+  }
+  if (!merchantId) {
+    return res.status(400).json({ error: "Missing merchantID" });
+  }
 
-    // Generate the checksum for the status request
-    const keyIndex = 1;
-    const stringToHash =
-      `/pg/v1/status/${merchantId}/${merchantTransactionId}` + SALT_KEY;
-    const sha256 = crypto
-      .createHash("sha256")
-      .update(stringToHash)
-      .digest("hex");
-    const checksum = sha256 + "###" + keyIndex;
-    // console.log(checksum)
+  if (merchantTransactionId) {
+    let statusUrl =
+      `${MERCHANT_STATUS_URL}/pg/v1/status/${merchantId}/` +
+      merchantTransactionId;
 
-    // Set the request options
-    const options = {
-      method: "GET",
-      url: `${MERCHANT_STATUS_URL}/${merchantId}/${merchantTransactionId}`, // Make sure the URL is correct
-      headers: {
-        accept: "application/json",
-        "Content-Type": "application/json",
-        "X-VERIFY": checksum,
-        "X-MERCHANT-ID": `${merchantId}`,
-      },
-    };
+    // generate X-VERIFY
+    let string =
+      `/pg/v1/status/${merchantId}/` + merchantTransactionId + SALT_KEY;
+    let sha256_val = sha256(string);
+    let xVerifyChecksum = sha256_val + "###" + 1;
 
-    // Make the request to PhonePe API
-    const response = await axios.request(options);
-    // console.log(response.data);
-
-    // Handle success or failure based on the response
-    if (response.data?.success) {
-      return res.redirect(successUrl);
-    } else {
-      return res.redirect(failureUrl);
-    }
-  } catch (error) {
-    // console.error("Error fetching payment status:", error);
-
-    // Handle Axios errors
-    if (error.response) {
-      console.log(error.response)
-      return res.status(error.response.status || 500).json({
-        error: `Payment Gateway Error: ${
-          error.response.data?.message || "Unexpected error"
-        }`,
+    axios
+      .get(statusUrl, {
+        headers: {
+          "Content-Type": "application/json",
+          "X-VERIFY": xVerifyChecksum,
+          "X-MERCHANT-ID": merchantTransactionId,
+          accept: "application/json",
+        },
+      })
+      .then(function (response) {
+        console.log("response->", response.data);
+        if (response.data && response.data.code === "PAYMENT_SUCCESS") {
+          // redirect to FE payment success status page
+          res.send(response.data);
+        } else {
+          // redirect to FE payment failure / pending status page
+        }
+      })
+      .catch(function (error) {
+        // redirect to FE payment failure / pending status page
+        res.send(error);
       });
-    }
-
-    // Handle other errors
-    return res.status(500).json({
-      error: `Failed to fetch payment status: ${
-        error.message || "Internal Server Error"
-      }`,
-    });
+  } else {
+    res.send("Sorry!! Error");
   }
 };
