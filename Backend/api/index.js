@@ -11,15 +11,13 @@ app.use(
   })
 );
 
-
-
 // Allowing CORS for all origins
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-app.use((req,res,next)=>{
-  res.setHeader('Referrer-Policy','strict-origin-when-cross-origin');
-  res.setHeader('Cross-Origin-Opener-Policy','same-origin');
+app.use((req, res, next) => {
+  res.setHeader("Referrer-Policy", "strict-origin-when-cross-origin");
+  res.setHeader("Cross-Origin-Opener-Policy", "same-origin");
   next();
 });
 
@@ -88,6 +86,65 @@ app.get("/", (req, res) => {
   </body>
 </html>
   `);
+});
+
+app.get("/success-payment", (req, res) => {
+  res.send(`<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment Success</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body style="font-family: Arial, sans-serif; background-color: #f3f4f6; display: flex; justify-content: center; align-items: center; min-height: 100vh;">
+
+  <div style="background-color: #ffffff; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); padding: 20px; text-align: center; max-width: 400px;">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-green-500 mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="stroke-width: 2;">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+    <h1 style="font-size: 1.5rem; font-weight: 700; color: #1f2937;">Payment Successful</h1>
+    <p style="font-size: 1rem; color: #6b7280; margin-top: 0.5rem;">
+      Thank you for your payment! Your transaction has been completed.
+    </p>
+    <a href="/home" style="margin-top: 20px; background-color: #10b981; color: #ffffff; padding: 10px 20px; border-radius: 4px; font-size: 1rem; font-weight: 500; text-decoration: none; display: inline-block; transition: background-color 0.3s ease;">
+  Back to Home
+</a>
+  </div>
+
+</body>
+</html>
+`);
+});
+
+app.get("/faliure-payment", (req, res) => {
+  res.send(`<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment Failed</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body style="font-family: Arial, sans-serif; background-color: #f3f4f6; display: flex; justify-content: center; align-items: center; min-height: 100vh;">
+
+  <div style="background-color: #ffffff; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); padding: 20px; text-align: center; max-width: 400px;">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-red-500 mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="stroke-width: 2;">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+    </svg>
+    <h1 style="font-size: 1.5rem; font-weight: 700; color: #1f2937;">Payment Failed</h1>
+    <p style="font-size: 1rem; color: #6b7280; margin-top: 0.5rem;">
+      Unfortunately, your payment was not successful. Please try again or contact support.
+    </p>
+    <a href="/retry-payment" style="margin-top: 20px; background-color: #ef4444; color: #ffffff; padding: 10px 20px; border-radius: 4px; font-size: 1rem; font-weight: 500; text-decoration: none; display: inline-block; transition: background-color 0.3s ease;">
+  Retry Payment
+</a>
+    
+  </div>
+
+</body>
+</html>
+`);
 });
 
 const PORT = process.env.PORT || 8000;
