@@ -7,7 +7,8 @@ const MERCHANT_BASE_URL = "https://api.phonepe.com/apis/hermes/pg/v1/pay";
 
 const MERCHANT_STATUS_URL = "https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/status/";
 // const redirectUrl = "https://phone-pe-payment-gateway-integration.vercel.app/api/payment/status/:transactionID";
-const redirectUrl = "http://localhost:8000/api/payment/status/:transactionID";
+const redirectUrl = "https://phone-pe-payment-gateway-integration.vercel.app/success-payment";
+// const redirectUrl = "http://localhost:8000/api/payment/status/:transactionID";
 // const failureUrl = "https://phone-pe-payment-gateway-integration.vercel.app/api/payment/payment-failure";
 // const successUrl = "https://phone-pe-payment-gateway-integration.vercel.app/api/payment/payment-success";
 // const redirectUrl = "https://www.blackgrapessoftech.com/api/payment/status";
