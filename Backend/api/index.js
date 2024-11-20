@@ -107,7 +107,7 @@ app.get("/success-payment", (req, res) => {
     <p style="font-size: 1rem; color: #6b7280; margin-top: 0.5rem;">
       Thank you for your payment! Your transaction has been completed.
     </p>
-    <a href="/home" style="margin-top: 20px; background-color: #10b981; color: #ffffff; padding: 10px 20px; border-radius: 4px; font-size: 1rem; font-weight: 500; text-decoration: none; display: inline-block; transition: background-color 0.3s ease;">
+    <a href="https://apprenticeship.blackgrapessoftech.com/" style="margin-top: 20px; background-color: #10b981; color: #ffffff; padding: 10px 20px; border-radius: 4px; font-size: 1rem; font-weight: 500; text-decoration: none; display: inline-block; transition: background-color 0.3s ease;">
   Back to Home
 </a>
   </div>
@@ -136,7 +136,7 @@ app.get("/faliure-payment", (req, res) => {
     <p style="font-size: 1rem; color: #6b7280; margin-top: 0.5rem;">
       Unfortunately, your payment was not successful. Please try again or contact support.
     </p>
-    <a href="/retry-payment" style="margin-top: 20px; background-color: #ef4444; color: #ffffff; padding: 10px 20px; border-radius: 4px; font-size: 1rem; font-weight: 500; text-decoration: none; display: inline-block; transition: background-color 0.3s ease;">
+    <a href="https://apprenticeship.blackgrapessoftech.com/checkout" style="margin-top: 20px; background-color: #ef4444; color: #ffffff; padding: 10px 20px; border-radius: 4px; font-size: 1rem; font-weight: 500; text-decoration: none; display: inline-block; transition: background-color 0.3s ease;">
   Retry Payment
 </a>
     

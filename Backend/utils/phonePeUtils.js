@@ -11,8 +11,8 @@ const redirectUrl = "http://localhost:8000/api/payment/status/:transactionID";
 // const failureUrl = "https://phone-pe-payment-gateway-integration.vercel.app/api/payment/payment-failure";
 // const successUrl = "https://phone-pe-payment-gateway-integration.vercel.app/api/payment/payment-success";
 // const redirectUrl = "https://www.blackgrapessoftech.com/api/payment/status";
-const successUrl = "https://apprenticeship.blackgrapessoftech.com/payment-success";
-const failureUrl = "https://apprenticeship.blackgrapessoftech.com/payment-failure";
+const successUrl = "https://phone-pe-payment-gateway-integration.vercel.app/success-payment";
+const failureUrl = "https://phone-pe-payment-gateway-integration.vercel.app/faliure-payment";
 
 module.exports = {
   SALT_KEY,
